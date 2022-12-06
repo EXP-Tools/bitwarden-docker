@@ -19,6 +19,6 @@ RUN python -m pip install --upgrade pip
 
 # 配置入口
 RUN echo "alias ll='ls -alF'" >> /root/.bashrc
-ADD ./entrypoint/docker-entrypoint.sh /docker-entrypoint.sh
+ADD ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh
 ENTRYPOINT [ "/docker-entrypoint.sh" ]

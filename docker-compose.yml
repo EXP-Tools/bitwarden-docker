@@ -20,6 +20,7 @@ services:
     volumes:
       - ./data:/data
     ports:
+      - 3012:3012
       - 80:80
       - 4443:443
     networks:

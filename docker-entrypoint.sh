@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-
-/vaultwarden
+# CMD ["/start.sh"]
+nohup /start.sh &
 
 # 保持前台运行，避免 docker 挂起
 while true ; do
