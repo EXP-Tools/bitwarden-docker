@@ -1,0 +1,37 @@
+# How to use :
+# docker-compose up -d
+# docker-compose down
+# --------------------------------------------------------------------------------
+
+version: '2'
+services:
+
+  bitwarden:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: bitwarden
+    hostname: bitwarden
+    # environment:
+    #   - TZ=Asia/Shanghai
+    #   - LANG=zh_CN.UTF-8
+    #   - LANGUAGE=zh_CN.UTF-8
+    #   - LC_ALL=zh_CN.UTF-8
+    volumes:
+      - ./data:/data
+    ports:
+      - 4443:443
+    networks:
+      bw:
+        ipv4_address: 172.168.18.2
+    restart: on-failure
+
+
+networks:
+  bw:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  172.168.18.0/24
+          gateway: 172.168.18.1
