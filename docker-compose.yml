@@ -9,14 +9,23 @@ services:
         - domain=${domain}
     container_name: bitwarden
     hostname: bitwarden
+    # environment:
+    #   - TZ=Asia/Shanghai
+    #   - DOMAIN=${domain}
+    #   - SIGNUPS_ALLOWED=false
+    #   - WEB_VAULT_ENABLED=true
+    #   - INVITATIONS_ALLOWED=false
+    #   - WEBSOCKET_ENABLED=true
+    #   - ROCKET_WORKERS=20
+    #   - SHOW_PASSWORD_HINT=false
+    #   - LOG_FILE=/data/bitwarden.log
+    #   - IP_HEADER=X-Real-IP
     volumes:
       - ./bitwarden/data:/data
       - ./nginx/cert/:/etc/nginx/cert/
       - ./nginx/html:/usr/share/nginx/html
+      - ./logs/nginx:/var/log/nginx
     ports:
-      # HTTP 协议，仅测试用，有中间人攻击风险，生产环境不要暴露出来
-      - 35127:35127
-      # HTTPS 协议
       - 35128:35128
     networks:
       bw:

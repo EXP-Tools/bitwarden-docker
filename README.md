@@ -3,6 +3,7 @@ docker 一键部署密码管理工具
 
 ------
 
+https://mrchi.cc/posts/selfhosted-bitwarden/
 
 docker run -d --name vaultwarden -v /vw-data/:/data/ -p 80:80 vaultwarden/server:latest
 

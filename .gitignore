@@ -1,2 +1,3 @@
 bitwarden/data
 nginx/cert
+*.log
