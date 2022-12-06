@@ -10,7 +10,7 @@ services:
     container_name: bitwarden
     hostname: bitwarden
     volumes:
-      - ./data:/data
+      - ./bitwarden/data:/data
       - ./cert/:/etc/nginx/cert/
       - ./nginx/html:/usr/share/nginx/html
     ports:

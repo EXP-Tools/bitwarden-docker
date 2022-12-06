@@ -19,6 +19,6 @@ do
   shift
 done
 
-domain=${DOMAIN} docker-compose up -d
+domain=${DOMAIN} docker-compose build
 
 echo "finish ."
