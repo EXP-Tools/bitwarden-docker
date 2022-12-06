@@ -1,4 +1,5 @@
 FROM vaultwarden/server:latest
+ARG domain="demo_domain.com"
 
 RUN sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN apt-get clean && \
@@ -13,11 +14,13 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN python -m pip install --upgrade pip
 
 
+ADD ./nginx/etc/bitwarden_site.conf /etc/nginx/conf.d/bitwarden_site.conf
+RUN sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/conf.d/bitwarden_site.conf && \
+    mkdir -p /etc/nginx/cert/ && \
+    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
 
 
-
-
-# 配置入口
+WORKDIR /
 RUN echo "alias ll='ls -alF'" >> /root/.bashrc
 ADD ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh
