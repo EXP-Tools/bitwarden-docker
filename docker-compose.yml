@@ -14,6 +14,9 @@ services:
       - ./cert/:/etc/nginx/cert/
       - ./nginx/html:/usr/share/nginx/html
     ports:
+      # HTTP 协议，仅测试用，有中间人攻击风险，生产环境不要暴露出来
+      - 35127:35127
+      # HTTPS 协议
       - 35128:35128
     networks:
       bw:
