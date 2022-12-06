@@ -16,8 +16,7 @@ RUN python -m pip install --upgrade pip
 
 ADD ./nginx/etc/bitwarden_site.conf /etc/nginx/conf.d/bitwarden_site.conf
 RUN sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/conf.d/bitwarden_site.conf && \
-    mkdir -p /etc/nginx/cert/ && \
-    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
+    mkdir -p /etc/nginx/cert/
 
 
 WORKDIR /
