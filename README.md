@@ -76,15 +76,15 @@
 4. 构建镜像: `bin/build.[sh|ps1]`
 5. 复制 HTTPS 证书到工程内（测试环境跳过）: `bin/renew_cert.sh "/usr/local/bitwarden-docker"`
 6. 第一次运行 bitwarden 服务（开放注册）: 
-  - 测试环境: `bin/run.[sh|ps1] -p "http" -d "127.0.0.1" -r "true"`
-  - 生产环境: `bin/run.[sh|ps1] -p "https" -d "demo_domain.com" -r "true"`
+    - 测试环境: `bin/run.[sh|ps1] -p "http" -d "127.0.0.1" -r "true"`
+    - 生产环境: `bin/run.[sh|ps1] -p "https" -d "demo_domain.com" -r "true"`
 7. 访问 bitwarden 为自己注册一个主账号:
-  - 测试环境: http://127.0.0.1:35127/nedrawtib
-  - 生产环境: https://demo_domain.com:35128/nedrawtib
+    - 测试环境: http://127.0.0.1:35127/nedrawtib
+    - 生产环境: https://demo_domain.com:35128/nedrawtib
 8. 停止 bitwarden 服务: `bin/stop.[sh|ps1]`
 9. 重新运行 bitwarden 服务（关闭注册）: 
-  - 测试环境: `bin/run.[sh|ps1] -p "http" -d "127.0.0.1"`
-  - 生产环境: `bin/run.[sh|ps1] -p "https" -d "demo_domain.com"`
+    - 测试环境: `bin/run.[sh|ps1] -p "http" -d "127.0.0.1"`
+    - 生产环境: `bin/run.[sh|ps1] -p "https" -d "demo_domain.com"`
 
 ![](./imgs/02.jpg)
 
