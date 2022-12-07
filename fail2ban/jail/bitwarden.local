@@ -1,10 +1,20 @@
 [bitwarden]
 enabled = true
+
+# 设置不会被禁止访问的主机地址，它可以是单 IP 地址、CIDR （汇聚网段）地址，甚至可以是 DNS （主机域名）
+# 若有多个条目，各条目间用空格分隔
+ignoreip = 127.0.0.1
+
 port = 80,443,35128
 name = bitwarden
 filter = bitwarden
 banaction = iptables-multiport
 logpath = /root/bitwarden-data/bitwarden.log
-maxretry = 3
+
+
+# 设置禁止访问的时间间隔，以秒为单位
 bantime = 14400
+
+# 设置在这个指定时间间隔（以秒为单位）内，达到或超过  maxretry 次失败连接尝试，即被命中，禁止访问
 findtime = 14400
+maxretry = 3
