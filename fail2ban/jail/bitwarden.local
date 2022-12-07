@@ -1,15 +1,16 @@
 [bitwarden]
 enabled = true
+name = bitwarden
+filter = bitwarden
 
 # 设置不会被禁止访问的主机地址，它可以是单 IP 地址、CIDR （汇聚网段）地址，甚至可以是 DNS （主机域名）
 # 若有多个条目，各条目间用空格分隔
 ignoreip = 127.0.0.1
+port = 80,443,35127,35128
 
-port = 80,443,35128
-name = bitwarden
-filter = bitwarden
+# 禁止策略: iptables
 banaction = iptables-multiport
-logpath = /root/bitwarden-data/bitwarden.log
+logpath = /var/log/bitwarden/bitwarden.log
 
 
 # 设置禁止访问的时间间隔，以秒为单位

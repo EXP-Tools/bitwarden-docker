@@ -1,5 +1,4 @@
 FROM vaultwarden/server:latest
-ARG domain="demo_domain.com"
 
 RUN sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN apt-get clean && \
@@ -9,24 +8,20 @@ RUN apt-get clean && \
 # 安装基础软件
 RUN apt-get install -y curl wget vim zip unzip \
                         procps iputils-ping telnet net-tools netcat \
-                        nginx
-
+                        nginx fail2ban
 RUN apt-get install -y python3 python3-pip
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN python -m pip install --upgrade pip
 
 
-# 安装 fail2ban 防止被爆破
-RUN apt-get install -y fail2ban
-
-
-# 配置 nginx
+# 配置 nginx （反向代理）
 ADD ./nginx/etc/bitwarden_http.conf /etc/nginx/sites-available/bitwarden_http.conf
 ADD ./nginx/etc/bitwarden_https.conf /etc/nginx/sites-available/bitwarden_https.conf
-RUN sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/sites-available/bitwarden_http.conf && \
-    sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/sites-available/bitwarden_https.conf && \
-    rm -f /etc/nginx/sites-available/default && \
-    mkdir -p /etc/nginx/cert/
+RUN mkdir -p /etc/nginx/cert/
+
+
+# 配置 fail2ban （防爆破）
+RUN apt-get install -y fail2ban
 
 
 WORKDIR /

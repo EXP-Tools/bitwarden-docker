@@ -5,27 +5,37 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-      args:
-        - domain=${domain}
     container_name: bitwarden
     hostname: bitwarden
     environment:
       - TZ=Asia/Shanghai
       - PROTOCOL=${protocol}
-    #   - DOMAIN=${domain}
+      - DOMAIN=${domain}
+      - LOG_FILE=/var/log/bitwarden/bitwarden.log
+
+    # 开启/关闭新用户注册，私人服务器注册后关闭即可
     #   - SIGNUPS_ALLOWED=false
+
+    # 开启/关闭网页访问
     #   - WEB_VAULT_ENABLED=true
+
+    # 禁用邀请
     #   - INVITATIONS_ALLOWED=false
+
+    # 开启/关闭长连接
     #   - WEBSOCKET_ENABLED=true
     #   - ROCKET_WORKERS=20
     #   - SHOW_PASSWORD_HINT=false
-    #   - LOG_FILE=/data/bitwarden.log
-    #   - IP_HEADER=X-Real-IP
+
+    # 数据库（可以使用sqlite和mysql等多种数据库，这里选择mysql）
+    # DATABASE_URL: /data/db.sqlite3
+    # - DATABASE_URL: mysql://user:pass@ip:port/database
     volumes:
       - ./bitwarden/data:/data
       - ./nginx/cert/:/etc/nginx/cert/
       - ./nginx/html:/usr/share/nginx/html
       - ./logs/nginx:/var/log/nginx
+      - ./logs/bitwarden:/var/log/bitwarden
     ports:
       # HTTP 协议，只能暴露在测试环境
       - 127.0.0.1:35127:35127
