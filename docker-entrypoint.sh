@@ -7,18 +7,20 @@ HTTPS_CONF="/etc/nginx/sites-available/bitwarden_https.conf"
 BW_CONF="/etc/nginx/sites-available/default"
 rm -f ${BW_CONF}
 if [[ ${PROTOCOL} = "https" ]]; then
-    rm -f ${HTTP_CONF}
     mv ${HTTPS_CONF} ${BW_CONF}
+    rm -f ${HTTP_CONF}
 else
-    rm -f ${HTTPS_CONF}
     mv ${HTTP_CONF} ${BW_CONF}
+    rm -f ${HTTPS_CONF}
 fi
-sed -i "s/YOUR_DOMAIN/${DOMAIN}/g" ${BW_CONF}
+sed -i "s/YOUR_DOMAIN/${NGINX_DOMAIN}/g" ${BW_CONF}
 nginx
 
 
 # 启动防爆破
-service fail2ban start
+# 不能在 docker 里启动，fail2ban 只能部署在宿主机
+# 不然封禁的永远是 docker 的网关 IP
+# service fail2ban start
 
 
 # 启动 bitwarden

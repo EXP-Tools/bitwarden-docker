@@ -10,7 +10,8 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - PROTOCOL=${protocol}
-      - DOMAIN=${domain}
+      - NGINX_DOMAIN=${domain}
+      - DOMAIN=${protocol}://${domain}
       - LOG_FILE=/var/log/bitwarden/bitwarden.log
 
     # 开启/关闭新用户注册，私人服务器注册后关闭即可
