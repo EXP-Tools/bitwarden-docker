@@ -13,9 +13,9 @@
 
 ## 0x10 环境要求
 
-生产环境: ![](https://img.shields.io/badge/Platform-Linux%20amd64-brightgreen.svg)
+生产环境: ![](https://img.shields.io/badge/Platform-Linux%20amd64-red.svg)
 
-测试环境: ![](https://img.shields.io/badge/Platform-Linux%20amd64-brightgreen.svg) ![](https://img.shields.io/badge/OS-Windows%2010%2B-brightgreen.svg)
+测试环境: ![](https://img.shields.io/badge/Platform-Linux%20amd64-red.svg) ![](https://img.shields.io/badge/OS-Windows%2010%2B-blue.svg)
 
 > 这里是 bitwarden 服务端的运行环境要求，客户端直接从 Google Store 或者 Apple Store 下载即可
 
