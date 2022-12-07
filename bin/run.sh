@@ -2,24 +2,33 @@
 #------------------------------------------------
 # 运行 docker 服务
 # bin/run.sh
-#       [-d ${domain}]   设置 bitwarden 域名
 #       [-p ${protocol}] 启动协议类型 http/https
+#       [-d ${domain}]   设置 bitwarden 域名
+#       [-r true|false]  是否开放用户注册
 #------------------------------------------------
 
-
-DOMAIN="127.0.0.1"
 PROTOCOL="http"
+DOMAIN="127.0.0.1"
+REGISTER="false"
 
-set -- `getopt d:p: "$@"`
+set -- `getopt d:p:r: "$@"`
 while [ -n "$1" ]
 do
   case "$1" in
+    -p) PROTOCOL="$2"
+        shift ;;
     -d) DOMAIN="$2"
         shift ;;
-    -p) PROTOCOL="$2"
+    -r) REGISTER="$2"
         shift ;;
   esac
   shift
 done
 
-domain=${DOMAIN} protocol=${PROTOCOL} docker-compose up -d
+if [[ "x${REGISTER}" = "xtrue" ]]; then
+  REGISTER="true"
+else
+  REGISTER="false"
+fi
+
+protocol=${PROTOCOL} domain=${DOMAIN} register=${REGISTER} docker-compose up -d

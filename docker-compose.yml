@@ -13,24 +13,11 @@ services:
       - NGINX_DOMAIN=${domain}
       - DOMAIN=${protocol}://${domain}
       - LOG_FILE=/var/log/bitwarden/bitwarden.log
-
-    # 开启/关闭新用户注册，私人服务器注册后关闭即可
-    #   - SIGNUPS_ALLOWED=false
-
-    # 开启/关闭网页访问
-    #   - WEB_VAULT_ENABLED=true
-
-    # 禁用邀请
-    #   - INVITATIONS_ALLOWED=false
-
-    # 开启/关闭长连接
-    #   - WEBSOCKET_ENABLED=true
-    #   - ROCKET_WORKERS=20
-    #   - SHOW_PASSWORD_HINT=false
-
-    # 数据库（可以使用sqlite和mysql等多种数据库，这里选择mysql）
-    # DATABASE_URL: /data/db.sqlite3
-    # - DATABASE_URL: mysql://user:pass@ip:port/database
+    # 开放用户注册（私人服务器自己注册后关闭即可）
+      - SIGNUPS_ALLOWED=${register}
+    # 数据库连接串（默认使用 sqlite，支持使用 mysql 等其他数据库）
+    # - DATABASE_URL=mysql://user:pass@ip:port/database
+      - DATABASE_URL=/data/db.sqlite3
     volumes:
       - ./bitwarden/data:/data
       - ./nginx/cert/:/etc/nginx/cert/
