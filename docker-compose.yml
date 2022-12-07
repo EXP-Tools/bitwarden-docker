@@ -26,6 +26,7 @@ services:
       - ./nginx/html:/usr/share/nginx/html
       - ./logs/nginx:/var/log/nginx
     ports:
+      - 127.0.0.1:35127:35127
       - 35128:35128
     networks:
       bw:
