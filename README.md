@@ -134,7 +134,23 @@
 ![](./imgs/01.jpg)
 
 
-## 0x70 可选: Mysql 方案
+## 0x70 可选: 自动刷新证书
+
+certbot 申请的证书有效期为 90 天，在到期前的 30 天可以重新执行此命令更新证书有效期: `/usr/bin/certbot renew`
+
+但是每次都手动更新会比较麻烦，可以把 [renew_cert.sh](renew_cert.sh) 脚本设置到 crontab 自动更新证书：
+
+```shell
+
+# 编辑定时任务
+crontab -e
+
+# 每两个月更新一次证书
+0 0 1 */2 0 /bin/sh /usr/local/bitwarden-docker/renew_cert.sh "/usr/local/bitwarden-docker"
+```
+
+
+## 0x80 可选: Mysql 方案
 
 默认情况下，bitwarden 是使用加密的 sqlite3 作为数据库存储账密的，个人或家庭使用时完全没问题的，单机模式也推荐使用此方案。
 
