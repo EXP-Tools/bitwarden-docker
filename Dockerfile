@@ -20,9 +20,12 @@ RUN python -m pip install --upgrade pip
 RUN apt-get install -y fail2ban
 
 
-# 配置 nginx 反向代理
-ADD ./nginx/etc/bitwarden_site.conf /etc/nginx/sites-available/default
-RUN sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/sites-available/default && \
+# 配置 nginx
+ADD ./nginx/etc/bitwarden_http.conf /etc/nginx/sites-available/bitwarden_http.conf
+ADD ./nginx/etc/bitwarden_https.conf /etc/nginx/sites-available/bitwarden_https.conf
+RUN sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/sites-available/bitwarden_http.conf && \
+    sed -i "s/YOUR_DOMAIN/${domain}/g" /etc/nginx/sites-available/bitwarden_https.conf && \
+    rm -f /etc/nginx/sites-available/default && \
     mkdir -p /etc/nginx/cert/
 
 

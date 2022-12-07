@@ -9,8 +9,9 @@ services:
         - domain=${domain}
     container_name: bitwarden
     hostname: bitwarden
-    # environment:
-    #   - TZ=Asia/Shanghai
+    environment:
+      - TZ=Asia/Shanghai
+      - PROTOCOL=${protocol}
     #   - DOMAIN=${domain}
     #   - SIGNUPS_ALLOWED=false
     #   - WEB_VAULT_ENABLED=true
@@ -26,7 +27,9 @@ services:
       - ./nginx/html:/usr/share/nginx/html
       - ./logs/nginx:/var/log/nginx
     ports:
+      # HTTP 协议，只能暴露在测试环境
       - 127.0.0.1:35127:35127
+      # HTTPS 协议，需要挂载有效的 HTTPS 证书
       - 35128:35128
     networks:
       bw:

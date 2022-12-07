@@ -6,7 +6,7 @@
 # ------------------------
 
 param(
-    [string]$d="demo_domain.com"
+    [string]$d="127.0.0.1"
 )
 
 $DOMAIN = $d

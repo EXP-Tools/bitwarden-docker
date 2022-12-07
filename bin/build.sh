@@ -5,14 +5,12 @@
 #       [-d ${domain}] 设置 bitwarden 域名
 # ------------------------
 
-DOMAIN="demo_domain.com"
+DOMAIN="127.0.0.1"
 
-set -- `getopt p:d: "$@"`
+set -- `getopt d: "$@"`
 while [ -n "$1" ]
 do
   case "$1" in
-    -p) PASSWORD="$2"
-        shift ;;
     -d) DOMAIN="$2"
         shift ;;
   esac

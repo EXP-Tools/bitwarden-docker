@@ -1,7 +1,14 @@
 # PowerShell
 #------------------------------------------------
 # 运行 docker 服务
-# bin/run_docker.ps1
+# bin/run.ps1
+#       [-p ${protocol}] 启动协议类型 http/https
 #------------------------------------------------
 
-docker-compose up -d
+param(
+    [string]$p="http"
+)
+
+$PROTOCOL = $p
+
+$ENV:protocol=${PROTOCOL}; docker-compose up -d

@@ -3,6 +3,9 @@ docker 一键部署密码管理工具
 
 ------
 
+http://127.0.0.1:35127/bitwarden
+https://127.0.0.1:35128/bitwarden
+
 https://mrchi.cc/posts/selfhosted-bitwarden/
 
 docker run -d --name vaultwarden -v /vw-data/:/data/ -p 80:80 vaultwarden/server:latest
