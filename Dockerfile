@@ -23,8 +23,8 @@ RUN mkdir -p /etc/nginx/cert/
 # 配置 fail2ban （防爆破）
 RUN apt-get install -y fail2ban
 RUN rm -f /etc/fail2ban/jail.d/defaults-debian.conf
-ADD ./fail2ban/jail/bitwarden.local /etc/fail2ban/jail.d/bitwarden.local
-ADD ./fail2ban/filter/bitwarden.local /etc/fail2ban/filter.d/bitwarden.local
+ADD ./fail2ban/jail.d/bitwarden.local /etc/fail2ban/jail.d/bitwarden.local
+ADD ./fail2ban/filter.d/bitwarden.local /etc/fail2ban/filter.d/bitwarden.local
 
 
 WORKDIR /

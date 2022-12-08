@@ -5,11 +5,11 @@
 #------------------------------------------------
 
 
-WORKDIR=$1
-if [ -z "${WORKDIR}" ] ; then
-  WORKDIR="/usr/local/bitwarden-docker"
+INSTALL_DIR=$1
+if [ -z "${INSTALL_DIR}" ] ; then
+  INSTALL_DIR="/usr/local/bitwarden-docker"
 fi
 
 /usr/bin/certbot renew
-cat /etc/letsencrypt/live/*/fullchain.pem > ${WORKDIR}/nginx/cert/fullchain.pem
-cat /etc/letsencrypt/live/*/privkey.pem > ${WORKDIR}/nginx/cert/privkey.pem
+cat /etc/letsencrypt/live/*/fullchain.pem > ${INSTALL_DIR}/nginx/cert/fullchain.pem
+cat /etc/letsencrypt/live/*/privkey.pem > ${INSTALL_DIR}/nginx/cert/privkey.pem
