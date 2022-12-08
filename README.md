@@ -121,7 +121,7 @@
 由于 bitwarden 服务端是暴露在公网环境的，因此建议生产环境的云主机开启防爆破：
 
 1. 安装 fail2ban
-2. 复制 jail 配置: `cp ./fail2ban/jail/bitwarden.local /etc/fail2ban/jail.d/bitwarden.local`，并把其中的 `logpath` 指向此工程下的 `logs/bitwarden/bitwarden.log` 日志（根据实际安装位置用绝对路径）
+2. 复制 jail 配置: `cp ./fail2ban/jail/bitwarden.local /etc/fail2ban/jail.d/bitwarden.local`，并把其中的日志监控路径 `logpath` 修改为 `/usr/local/bitwarden-docker/logs/bitwarden/bitwarden.log`（根据实际安装位置调整，必须用绝对路径）
 3. 复制 filter 配置: `cp ./fail2ban/filter/bitwarden.local /etc/fail2ban/filter.d/bitwarden.local`
 4. 启动防火墙: `service iptables start`
 5. 启动 fail2ban: `service fail2ban start`
