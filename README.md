@@ -10,6 +10,8 @@
 
 但 1password 是付费的、而且密码托管在第三方平台，部分同学担心自己的重要密码被泄露，此时就可以使用 bitwarden 搭建自己的私人密码管理服务。
 
+![](./imgs/06.png)
+
 
 ## 0x10 环境要求
 
@@ -75,20 +77,30 @@
 3. 切换目录: `cd /usr/local/bitwarden-docker`
 4. 构建镜像: `bin/build.[sh|ps1]`
 5. 复制 HTTPS 证书到工程内（测试环境跳过）: `bin/renew_cert.sh "/usr/local/bitwarden-docker"`
-6. 第一次运行 bitwarden 服务（开放注册）: 
+6. 第一次运行 bitwarden 服务（**开放新用户注册**）: 
     - 测试环境: `bin/run.[sh|ps1] -p "http" -d "127.0.0.1" -r "true"`
     - 生产环境: `bin/run.[sh|ps1] -p "https" -d "demo_domain.com" -r "true"`
 7. 访问 bitwarden 为自己注册一个主账号:
     - 测试环境: http://127.0.0.1:35127/nedrawtib
     - 生产环境: https://demo_domain.com:35128/nedrawtib
-8. 停止 bitwarden 服务: `bin/stop.[sh|ps1]`
-9. 重新运行 bitwarden 服务（关闭注册）: 
+
+> 端口号 和 路由地址 之所以设计为不容易记忆，主要时为了防止公网扫描，内置 nginx 也被设置为只要访问其他路由地址一律返回 500
+
+![](./imgs/07.gif)
+
+8. 注册主账号之后，停止 bitwarden 服务: `bin/stop.[sh|ps1]`
+9. 重新运行 bitwarden 服务（**关闭新用户注册**），即可正常使用: 
     - 测试环境: `bin/run.[sh|ps1] -p "http" -d "127.0.0.1"`
     - 生产环境: `bin/run.[sh|ps1] -p "https" -d "demo_domain.com"`
 
 ![](./imgs/02.jpg)
 
-> 端口号 和 路由地址 之所以设计为不容易记忆，主要时为了防止公网扫描，内置 nginx 也被设置为只要访问其他路由地址一律返回 500
+
+10. 可以尝试在页面创建一个账密测试效果：
+
+![](./imgs/04.png)
+
+![](./imgs/05.png)
 
 
 ## 0x40 服务暴露
@@ -97,13 +109,13 @@
 
 | 环境 | 暴露端口 | 暴露范围 | 协议 | 备注 |
 |:---:|:---:|:---:|:---:|:---|
-| 测试环境 | 35127 | 127.0.0.1 | http | 由于限制了本地访问，连局域网的 bitwarden 客户端都无法访问。<br/>如需要测试客户端，可以修改 [docker-compose.yml](./docker-compose.yml)，把 127.0.0.1 去掉即可 |
+| 测试环境 | 35127 | 127.0.0.1 | http | 由于限制了本地访问，连局域网的 bitwarden 客户端都无法访问。<br/>如需要测试局域网内的客户端，可以修改 [docker-compose.yml](./docker-compose.yml)，把 127.0.0.1 去掉即可 |
 | 生产环境 | 35128 | 0.0.0.0 | https | - |
 
 
-## 0x50 使用
+## 0x50 客户端接入
 
-至此 bitwarden 服务已成功运行，下载客户端即可:
+至此 bitwarden 服务已成功运行，之后下载客户端即可:
 
 - PC 平台: 在官网 https://bitwarden.com/download/ 下载
 - 移动端: 在 Google Store 或者 Apple Store 搜索 bitwarden 下载
@@ -114,6 +126,8 @@
 - 生产环境: https://demo_domain.com:35128/nedrawtib
 
 > 使用时务必记得主账号密码，否则一旦忘记、可能所有密码都找不回来了
+
+![](./imgs/03.png)
 
 
 ## 0x60 可选: 防爆破
