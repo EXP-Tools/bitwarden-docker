@@ -130,13 +130,18 @@
 | 生产环境 | 35128 | 0.0.0.0 | https | - |
 
 
-## 0x60 可选: 防爆破
+## 0x60 关于数据备份/迁移
+
+数据挂载在 [bitwarden/data](./bitwarden/data/) 目录下，若需要备份/迁移时，保留此目录即可。
+
+
+## 0x70 可选: 防爆破
 
 由于 bitwarden 服务端是暴露在公网环境的，因此建议生产环境的云主机开启防爆破：
 
 1. 安装 fail2ban: `apt-get install -y fail2ban`
-3. 执行脚本自动配置并运行 fail2ban: `bin/enable_fail2ban.sh "/usr/local/bitwarden-docker"`，其中入参为 bitwarden 的安装位置
-4. 启动防火墙: `service iptables start`
+2. 执行脚本自动配置并运行 fail2ban: `bin/enable_fail2ban.sh "/usr/local/bitwarden-docker"`，其中入参为 bitwarden 的安装位置
+3. 启动防火墙: `service iptables start`
 
 开启防爆破之后，可以模拟输错 3 次密码，然后执行以下命令可以查看封禁记录:
 
@@ -147,7 +152,7 @@
 > 之所以不集成到 docker 内，是因为在 docker 内无法检测到用户 IP，会误封网关 IP
 
 
-## 0x70 可选: 自动刷新证书
+## 0x80 可选: 自动刷新证书
 
 certbot 申请的证书有效期为 90 天，在到期前的 30 天可以重新执行此命令更新证书有效期: `/usr/bin/certbot renew`
 
@@ -163,7 +168,7 @@ crontab -e
 ```
 
 
-## 0x80 可选: Mysql 方案
+## 0x90 可选: Mysql 方案
 
 默认情况下，bitwarden 是使用加密的 sqlite3 作为数据库存储账密的，个人或家庭使用时完全没问题的，单机模式也推荐使用此方案。
 
