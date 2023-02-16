@@ -17,6 +17,7 @@ RUN python -m pip install --upgrade pip
 # 配置 nginx （反向代理）
 ADD ./nginx/etc/bitwarden_http.conf /etc/nginx/sites-available/bitwarden_http.conf
 ADD ./nginx/etc/bitwarden_https.conf /etc/nginx/sites-available/bitwarden_https.conf
+ADD ./nginx/etc/shared /etc/nginx/shared
 RUN mkdir -p /etc/nginx/cert/
 
 

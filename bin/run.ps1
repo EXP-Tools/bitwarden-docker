@@ -21,4 +21,7 @@ if ("x${r}" -eq "xtrue") {
     $REGISTER = "true"
 }
 
-$ENV:protocol=${PROTOCOL}; $ENV:domain=${DOMAIN}; $ENV:register=${REGISTER}; docker-compose up -d
+$ENV:protocol=${PROTOCOL}; `
+$ENV:domain=${DOMAIN}; `
+$ENV:register=${REGISTER}; `
+docker-compose up -d

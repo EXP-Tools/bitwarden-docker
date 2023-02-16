@@ -4,4 +4,7 @@
 # bin/stop.sh
 #------------------------------------------------
 
+protocol="any" \
+domain="any" \
+register="any" \
 docker-compose down

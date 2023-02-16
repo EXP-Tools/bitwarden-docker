@@ -4,5 +4,7 @@
 # bin/build.sh 
 # ------------------------
 
-
-domain=${DOMAIN} docker-compose build
+protocol="any" \
+domain="any" \
+register="any" \
+docker-compose build

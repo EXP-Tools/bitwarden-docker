@@ -31,4 +31,7 @@ else
   REGISTER="false"
 fi
 
-protocol=${PROTOCOL} domain=${DOMAIN} register=${REGISTER} docker-compose up -d
+protocol=${PROTOCOL} \
+domain=${DOMAIN} \
+register=${REGISTER} \
+docker-compose up -d
