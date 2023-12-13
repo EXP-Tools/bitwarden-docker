@@ -2,9 +2,10 @@ version: '2'
 services:
 
   bitwarden:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: expm02/bitwarden-docker:latest
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
     container_name: bitwarden
     hostname: bitwarden
     environment:
